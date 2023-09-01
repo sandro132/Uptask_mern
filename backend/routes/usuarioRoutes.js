@@ -5,15 +5,21 @@ import {
     autenticar,
     confirmar,
     olvidePassword,
-    comprobarToken
-} from "../controllers/usuarioController.js"
+    comprobarToken,
+    nuevoPassword,
+    perfil,
+} from "../controllers/usuarioController.js";
+
+import checkAut from "../middleware/checkAuth.js";
 
 // Autenticacion, Registro y confirmacion de Usuarios
 
 router.post("/", registrar)
 router.post("/login", autenticar)
-router.get("/confirmar/:token", confirmar)
+router.get("/confirmar/:token", confirmar);
 router.post("/olvide-password", olvidePassword);
-router.get("/olvide-password/:token", comprobarToken);
+router.route("/olvide-password/:token").get(comprobarToken).post(nuevoPassword);
+
+router.get("/perfil", checkAut, perfil);
 
 export default router;
