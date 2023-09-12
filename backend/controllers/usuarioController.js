@@ -14,7 +14,6 @@ const registrar = async (req, res) => {
 
     console.log(existeUsuario);
 
-
     try {
         const usuario = new Usuario(req.body);
         usuario.token = generarId();
@@ -128,7 +127,9 @@ const confirmar = async (req, res) => {
     };
 
     const perfil = async (req, res) => {
-        console.log("Desde Perfil...")
+        const { usuario } = req
+
+        res.json(usuario)
     }
 export {
     registrar,
